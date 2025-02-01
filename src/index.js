@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { sendToVercelAnalytics } from './vitals';
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import './styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Импорт стилей Bootstrap
+import App from './App.jsx'
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
-reportWebVitals(sendToVercelAnalytics);
+createRoot(document.getElementById('root')).render(
+    <BrowserRouter>
+        <Routes>
+            <Route path="/:orderId" element={<App />} />
+            <Route path="/" element={<div className={'text-white'}>Invalid URL</div>} />
+            <Route path="*" element={<div className={'text-white'}>Invalid URL</div>} />
+        </Routes>
+    </BrowserRouter>,
+)
